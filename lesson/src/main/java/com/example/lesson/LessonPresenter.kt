@@ -5,11 +5,8 @@ import com.example.core.http.HttpClient
 import com.example.core.utils.Utils
 import com.example.lesson.entity.Lesson
 import com.google.gson.reflect.TypeToken
-import java.lang.ref.WeakReference
 
-class LessonPresenter(activity: LessonActivity) {
-
-    private val weak = WeakReference<LessonActivity>(activity)
+class LessonPresenter(private val activity: LessonActivity) {
 
     private val lessons = ArrayList<Lesson>()
 
@@ -18,15 +15,13 @@ class LessonPresenter(activity: LessonActivity) {
     fun fetchData() {
         HttpClient.get(LESSON_PATH, type, object : EntityCallback<List<Lesson>> {
             override fun onSuccess(entity: List<Lesson>) {
-                weak.get()?.let { activity ->
-                    activity.runOnUiThread {
-                        activity.showResult(lessons)
-                    }
+                activity.runOnUiThread {
+                    activity.showResult(lessons)
                 }
             }
 
             override fun onFailure(message: String) {
-                weak.get()?.runOnUiThread {
+                activity.runOnUiThread {
                     Utils.toast(message)
                 }
             }
@@ -34,7 +29,7 @@ class LessonPresenter(activity: LessonActivity) {
     }
 
     fun showPlayback() {
-        weak.get()?.showResult(lessons.filter {
+        activity.showResult(lessons.filter {
             it.state == Lesson.State.PLAYBACK
         })
     }
