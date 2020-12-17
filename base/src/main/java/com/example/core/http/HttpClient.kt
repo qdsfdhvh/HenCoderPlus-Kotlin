@@ -7,9 +7,6 @@ import java.lang.reflect.Type
 
 object HttpClient : OkHttpClient() {
 
-    @JvmStatic
-    val INSTANCE get() = this
-
     private val gson = GsonBuilder().create()
 
     private fun <T> convert(json: String, type: Type): T {
@@ -21,7 +18,7 @@ object HttpClient : OkHttpClient() {
             .url("https://api.hencoder.com/$path")
             .build()
 
-        val call = INSTANCE.newCall(request)
+        val call = newCall(request)
 
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -29,7 +26,7 @@ object HttpClient : OkHttpClient() {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                when(response.code()) {
+                when (response.code()) {
                     in 200..299 -> {
                         val json = response.body()?.string().orEmpty()
                         callback.onSuccess(convert(json, type))
