@@ -42,7 +42,7 @@ class LessonActivity : AppCompatActivity(R.layout.activity_lesson),
     }
 
     fun showResult(lessons: List<Lesson>) {
-        lessonAdapter.updateAndNotify(lessons)
+        lessonAdapter.list = lessons
         refreshLayout.isRefreshing = false
     }
 

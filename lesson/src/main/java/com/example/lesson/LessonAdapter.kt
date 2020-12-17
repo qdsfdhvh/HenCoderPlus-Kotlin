@@ -12,16 +12,13 @@ import com.example.lesson.entity.Lesson
 
 class LessonAdapter : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
 
-    private var list: List<Lesson> = emptyList()
+    var list: List<Lesson> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
-    fun updateAndNotify(list: List<Lesson>) {
-        this.list = list
-        notifyDataSetChanged()
-    }
-
-    override fun getItemCount(): Int {
-        return list.size
-    }
+    override fun getItemCount(): Int = list.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonViewHolder {
         return LessonViewHolder.create(parent)
