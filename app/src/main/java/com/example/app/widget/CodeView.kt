@@ -21,18 +21,18 @@ class CodeView @JvmOverloads constructor(
     attrs: AttributeSet? = null
 ) : AppCompatTextView(context, attrs) {
 
-    private val paint = Paint()
+    private val paint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        color = getColor(R.color.colorAccent)
+        strokeWidth = 6f.dp2px()
+    }
 
     init {
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
         gravity = Gravity.CENTER
         setBackgroundColor(getColor(R.color.colorPrimary))
         setTextColor(Color.WHITE)
-
-        paint.isAntiAlias = true
-        paint.style = Paint.Style.STROKE
-        paint.color = getColor(R.color.colorAccent)
-        paint.strokeWidth = 6f.dp2px()
 
         updateCode()
     }
