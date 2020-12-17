@@ -6,10 +6,7 @@ import android.content.Context
 open class BaseApplication : Application() {
 
     companion object {
-        private lateinit var currentApplication: Context
-
-        @JvmStatic
-        fun currentApplication() = currentApplication
+        lateinit var currentApplication: Context
     }
 
     override fun attachBaseContext(base: Context?) {

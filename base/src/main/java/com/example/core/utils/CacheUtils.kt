@@ -7,7 +7,7 @@ import com.example.core.R
 object CacheUtils {
 
     private val preferences by lazy(LazyThreadSafetyMode.NONE) {
-        val context = BaseApplication.currentApplication()
+        val context = BaseApplication.currentApplication
         context.getSharedPreferences(
             context.getString(R.string.app_name),
             Context.MODE_PRIVATE
