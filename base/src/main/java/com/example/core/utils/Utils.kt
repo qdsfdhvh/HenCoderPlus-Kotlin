@@ -5,17 +5,14 @@ import android.util.TypedValue
 import android.widget.Toast
 import com.example.core.BaseApplication
 
+private val displayMetrics = Resources.getSystem().displayMetrics
+
+fun Float.dp2px(): Float {
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, displayMetrics)
+}
+
 object Utils {
 
-    private val displayMetrics = Resources.getSystem().displayMetrics
-
-    @JvmStatic
-    fun dp2px(dp: Float): Float {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics)
-    }
-
-    @JvmOverloads
-    @JvmStatic
     fun toast(msg: String, duration: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(BaseApplication.currentApplication(), msg, duration).show()
     }

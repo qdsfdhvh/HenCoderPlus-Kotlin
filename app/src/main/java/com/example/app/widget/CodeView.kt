@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import com.example.app.R
 import com.example.core.utils.Utils
+import com.example.core.utils.dp2px
 import kotlin.random.Random
 
 class CodeView @JvmOverloads constructor(
@@ -31,7 +32,7 @@ class CodeView @JvmOverloads constructor(
         paint.isAntiAlias = true
         paint.style = Paint.Style.STROKE
         paint.color = getColor(R.color.colorAccent)
-        paint.strokeWidth = Utils.dp2px(6f)
+        paint.strokeWidth = 6f.dp2px()
 
         updateCode()
     }
